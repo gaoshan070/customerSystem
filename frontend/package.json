@@ -1,0 +1,19 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "antd": "^3.13.6",
+    "reqwest": "^2.0.5",
+    "umi": "^2.5.5",
+    "umi-plugin-react": "^1.5.2"
+  },
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build"
+  }
+}

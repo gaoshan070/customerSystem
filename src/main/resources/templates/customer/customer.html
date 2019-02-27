@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include::header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+
+                    </div>
+                    <div class="columns pull-left col-md-2 nopadding">
+                        <select class="form-control" id="sort">
+                            <option value="customer_id">ID</option>
+                            <option value="customer_name">Name</option>
+                            <option value="create_date">Create Date</option>
+                            <option value="update_date">Update Date</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-left col-md-2 nopadding">
+                        <select id="order" class="form-control">
+                            <option value="desc">DES</option>
+                            <option value="asc">ASC</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad()">Filter</button>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <select id="status" class="form-control">
+                            <option value="">All Status</option>
+                            <option value="0">Non-Active</option>
+                            <option value="1">Current</option>
+                            <option value="2">Prospective</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <input id="customerName" type="text" class="form-control"
+                               placeholder="CustomerName">
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <input id="email" type="text" class="form-control"
+                               placeholder="Email">
+                    </div>
+                </div>
+                <table id="customerTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/customer/customer.js">
+
+</script>
+</body>
+
+</html>
