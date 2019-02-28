@@ -22,10 +22,6 @@ export default {
           component: "customer"
         },
         {
-          path: "/helloworld",
-          component: "Helloworld"
-        },
-        {
           path: "/note",
           component: "note"
         },

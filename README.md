@@ -1,58 +1,79 @@
-### Customer Management Application
-***
-This is a demo application for technical test.
-#### Tech Stack
-1. Backend
-Spring Boot
-Thymeleaf
-Mybatis
-Druid
-Swagger2
 
-2. Frontend 
-JQuery
-JQuery Validation
-bootstrapTable
-Layui
+### Customer Management Application  
+***  
+This is a demo application for the technical test.  There are two ways to develop a browser user interface. The first is to use a template engine named Thymeleaf which is the default configuration in  SpringBoot. The other one applies ReacJS, separating the backend and frontend. 
 
-ReactJS
-Ant Design + umi + dva
+#### 1. Tech Stack  
 
-3. Development Environment
-Java 7
-Mysql
-IntelliJ Idea
-Maven
-Git
-***
-#### Steps to Run the Application
-1. Backend
-Go to the root project folder and execute the following command
+***Backend***
+SpringBoot  
+Thymeleaf  
+Mybatis  
+Druid  
+Swagger2  
+
+***Frontend***
+JQuery  
+JQuery Validation  
+bootstrapTable  
+Layui    
+ReactJS  (Ant Design + umi + dva )
+  
+***Development Environment***
+| Tool | Version   | 
+| -----: | --------- | 
+| JDK | 1.8 |
+| MySql | 5.7.16 |
+| Maven  | 3.3.9     | 
+| Node  | v10.15.1   | 
+| Git  | 2.11.0   | 
+
+***  
+#### 2. Steps to Run the Application  
+1. Backend  
+Go to the root project folder and execute the following command  
+```  
+mvn spring-boot:run  
+```  
+The application runs on http://localhost:8099.  
+  
+2. Frontend  
+***Prerequisite***  : install node and npm  
+Go the the frontend directory and execute the following command  
+```  
+npm install  
+npm start  
+```  
+The application runs on http://localhost:8000.  
+
+*** 
+#### 3. Deployment
+Go to the root project folder and execute the following command  
+```  
+mvn install
+```  
+Then the .jar file named propellerhead-1.0-SNAPSHOT will be generated in target directory. Run the command 
 ```
-mvn spring-boot:run
+nohup java -jar propellerhead-1.0-SNAPSHOT.jar $1 > /dev/null 2>&1 &
 ```
-The application runs on http://localhost:8099.
-
-2. Frontend
-***Prerequisite***
-install node and npm
-
-Go the the frontend directory and execute the following command
-```
-npm install
-npm start
-```
-The application runs on http://localhost:8000.
+Then the service will start up.
 ***
-#### Demo 
-http://:8099
-***Swagger API***
-http://:8099/swagger-ui.html
-***
-#### TODO List
-1. To check whether some fields (such as email, mobile) are valid
-2. To add authentication
-3. To add security configuration
-4. To add cache (e.g. Redis) to speed up the application
-5. To record the operation logs (consider AOP)
-6. To use JWT to create token
+#### 4. Demo 
+
+***Backend***
+http://52.62.10.220:8099/customer 
+
+***ReactJS Demo***
+http://52.62.10.220:8000
+
+***Swagger API***  
+http://52.62.10.220:8099/swagger-ui.html  
+***  
+#### 5. TODO List  
+1. To check whether some fields (such as email, mobile) are valid  
+2. To add authentication  
+3. To add security configuration  
+4. To add cache (e.g. Redis) to speed up the application  
+5. To record the operation logs (consider AOP)  
+6. To use JWT to create tokens
+7. To add transaction
