@@ -19,7 +19,7 @@ export default {
       routes: [
         {
           path: "/",
-          component: "note"
+          component: "customer"
         },
         {
           path: "/helloworld",

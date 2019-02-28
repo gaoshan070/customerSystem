@@ -58,7 +58,7 @@ public class NoteController extends BaseController {
     @ResponseBody
     String detail(@PathVariable("nId") Long nId){
         NoteDO note = noteService.get(nId);
-//        note.setNoteContent(ValidateUtil.decode4Html(note.getNoteContent()));
+        note.setNoteContent(ValidateUtil.decode4Html(note.getNoteContent()));
         return JsonUtil.bean2JsonStr(AjaxJsonResponseUtil.buildSuccessResponse(JsonUtil.bean2JsonTree(note)));
     }
 

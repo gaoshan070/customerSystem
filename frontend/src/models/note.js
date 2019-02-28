@@ -7,22 +7,37 @@ export default {
     note: {},
     pagination: {
       current: 0,
-      pageSize: 10
+      pageSize: 9,
+      total: 0
     },
     loading: false
   },
 
   effects: {
     *fetch({ payload }, { call, put }) {
-      const rsp = yield call(noteService.fetch, {
-        offset: 0,
-        customerId: payload
+      const rsp = yield call(noteService.fetch, payload);
+      yield put({
+        type: "loadNoteList",
+        payload: { data: rsp.rows, total: rsp.total }
       });
-      yield put({ type: "loadNoteList", payload: { data: rsp.rows } });
     },
     *detail({ payload }, { call, put }) {
       const rsp = yield call(noteService.getDetail, payload);
       yield put({ type: "loadNoteDetail", payload: { note: rsp.data } });
+    },
+    *update({ payload }, { call, put }) {
+      const rsp = yield call(noteService.update, payload);
+      yield put({
+        type: "fetch",
+        payload: { offset: 0, customerId: payload.customerId }
+      });
+    },
+    *save({ payload }, { call, put }) {
+      const rsp = yield call(noteService.save, payload);
+      yield put({
+        type: "fetch",
+        payload: { offset: 0, customerId: payload.customerId }
+      });
     }
   },
 
@@ -30,12 +45,16 @@ export default {
     loadNoteList(
       state,
       {
-        payload: { data }
+        payload: { data, total }
       }
     ) {
       return {
         ...state,
-        data
+        data,
+        pagination: {
+          current: 1,
+          total: total
+        }
       };
     },
     loadNoteDetail(
@@ -58,7 +77,6 @@ export default {
         data: nextData,
         counter: nextCounter
       };
-    },
-    update(state, { payload: updateNote }) {}
+    }
   }
 };

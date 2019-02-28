@@ -19,11 +19,10 @@ class BasicLayout extends Component {
           />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Main</span>
-            </Menu.Item>
-            <Menu.Item key="5">
-              <Link to="/customers">Customers</Link>
+              <Link to="/">
+                <Icon type="pie-chart" />
+                <span>Main</span>
+              </Link>
             </Menu.Item>
             <SubMenu
               key="sub1"
@@ -50,13 +49,13 @@ class BasicLayout extends Component {
           <Header
             style={{ background: "#fff", textAlign: "center", padding: 0 }}
           >
-            Header
+            <h1>Customer Infomation System</h1>
           </Header>
           <Content style={{ margin: "24px 16px 0" }}>
             {this.props.children}
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design @2019 Created by Shan Gao
+            Demo project @2019 Created by Shan Gao
           </Footer>
         </Layout>
       </Layout>

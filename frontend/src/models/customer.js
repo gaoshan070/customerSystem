@@ -14,21 +14,29 @@ export default {
   },
 
   effects: {
-    *fetch({ _ }, { call, put }) {
+    *fetch({ _ }, { call, put, select }) {
       const rsp = yield call(customerService.fetch, {
         offset: 0
       });
+      const pager = yield select(state => state.customers.pagination);
       yield put({
         type: "loadCustomerList",
-        payload: { data: rsp.rows, total: rsp.total }
+        payload: {
+          data: rsp.rows,
+          total: rsp.total,
+          pagination: pager
+        }
       });
     },
     *refresh({ payload }, { call, put }) {
-      console.log(payload);
       const rsp = yield call(customerService.refresh, payload);
       yield put({
         type: "loadCustomerList",
-        payload: { data: rsp.rows, total: rsp.total }
+        payload: {
+          data: rsp.rows,
+          total: rsp.total,
+          pagination: payload.pagination
+        }
       });
     },
     *detail({ payload }, { call, put }) {
@@ -39,9 +47,10 @@ export default {
       });
     },
     *update({ payload }, { call, put }) {
-      const rsp = yield call(customerService.save, payload);
-      // yield put({ type: 'queryList' });
-      return rsp;
+      const rsp = yield call(customerService.update, payload);
+      yield put({
+        type: "fetch"
+      });
     }
   },
 
@@ -49,13 +58,14 @@ export default {
     loadCustomerList(
       state,
       {
-        payload: { data, total }
+        payload: { data, total, pagination }
       }
     ) {
       return {
         ...state,
         data,
         pagination: {
+          current: pagination.current,
           total: total
         }
       };

@@ -8,3 +8,8 @@
 .operation a {
   margin: 0 0.5em;
 }
+
+.filterInput .ant-input {
+  width: 200px !important;
+  margin: 0 8px 8px 0;
+}

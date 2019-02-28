@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Card, Button, Modal, Form, Input } from "antd";
+import { Card, Button, Modal, Form, Input, Pagination, Row, Col } from "antd";
 import { connect } from "dva";
 import TextArea from "antd/lib/input/TextArea";
+import NoteModal from "../components/NoteModal";
 
 const namespace = "notes";
 
 const FormItem = Form.Item;
 
 const style = {
-  width: "400px",
+  width: "300px",
   margin: "30px",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
   border: "1px solid #e8e8e8"
@@ -16,17 +17,19 @@ const style = {
 
 const mapStateToProps = state => {
   const noteList = state[namespace].data;
+  const pagination = state[namespace].pagination;
   return {
-    noteList
+    noteList,
+    pagination
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDidMount: cid => {
+    onDidMount: query => {
       dispatch({
         type: `${namespace}/fetch`,
-        payload: cid
+        payload: query
       });
     },
     onClickAdd: newNote => {
@@ -57,70 +60,67 @@ const mapDispatchToProps = dispatch => {
 )
 export default class Note extends Component {
   state = {
-    customerId: null,
+    customerId: this.props.location.query.cid,
     visible: false,
     id: null
   };
-  componentDidMount() {
-    this.props.onDidMount(this.props.location.query.cid);
-  }
-
-  showModal = () => {
-    this.setState({ visible: true });
+  componentDidMount = () => {
+    let customerId = this.state.customerId;
+    let query = { offset: 0, customerId: customerId };
+    this.props.onDidMount(query);
   };
 
-  handleOk = () => {
-    const {
-      form: { validateFields }
-    } = this.props;
-
-    validateFields((err, values) => {
-      if (!err) {
-        this.saveNote(values);
-        this.setState({ visible: false });
-      }
-    });
+  refresh = current => {
+    const { customerId } = this.state;
+    let query = { offset: current, customerId: customerId };
+    this.props.onDidMount(query);
   };
-  handleCancel = () => {
-    this.setState({
-      visible: false
-    });
-  };
-
-  detail(id) {
-    this.props.onClickView(id);
-  }
 
   render() {
-    const { visible, id } = this.state;
     return (
       <div>
-        <Modal
-          title="New Note"
-          visible={visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <Form>
-            <FormItem label="Note Content">
-              <TextArea />
-            </FormItem>
-          </Form>
-        </Modal>
-        {this.props.noteList.map(note => {
-          return (
-            <Card
-              style={style}
-              key={note.noteId}
-              actions={[<a onClick={this.detail(note.noteId)}>Edit</a>]}
-            >
-              <Card.Meta description={note.noteContent} />
-            </Card>
-          );
-        })}
         <div>
-          <Button onClick={() => this.showModal()}>Add</Button>
+          <NoteModal
+            record={{
+              customerId: this.state.customerId,
+              noteContent: "",
+              noteId: 0
+            }}
+          >
+            <Button>Add</Button>
+          </NoteModal>
         </div>
+        <Row gutter={16}>
+          {this.props.noteList.map(note => {
+            return (
+              <Col key={note.noteId} span={8}>
+                <Card
+                  style={style}
+                  key={note.noteId}
+                  extra={[
+                    <NoteModal
+                      key={note.noteId}
+                      record={{
+                        customerId: note.customerId,
+                        noteContent: note.noteContent,
+                        noteId: note.noteId
+                      }}
+                    >
+                      <a>Edit</a>
+                    </NoteModal>
+                  ]}
+                >
+                  <Card.Meta description={note.noteContent} />
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+        <Pagination
+          onChange={this.refresh}
+          defaultCurrent={1}
+          total={this.props.pagination.total}
+        />
       </div>
     );
   }
