@@ -2,6 +2,8 @@
 ***  
 This is a demo application for the technical test.  There are two ways to develop a browser user interface. The first is to use a template engine named Thymeleaf which is the default configuration in  SpringBoot. The other one applies ReacJS, separating the backend and frontend. 
 
+***
+
 #### 1. Tech Stack  
 
 ***Backend***
@@ -35,7 +37,7 @@ Git  2.11.0
 ***  
 #### 2. Steps to Run the Application  
 1. Backend  
-Firstly, execute the sdk_customer.sql in Mysql and go to the root project folder and execute the following command  
+Firstly, execute the sdk_customer.sql in Mysql. Secondly, modify the configuration of MySql connection in application-*.yml (depends on the profile you use) under resources directory. Then go to the root project folder and execute the following command  
 ```  
 mvn spring-boot:run  
 ```  
