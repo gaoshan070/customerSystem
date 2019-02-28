@@ -217,7 +217,7 @@ export default class CustomerPage extends Component {
     return (
       <div>
         <Row>
-          <Col span={2}>
+          <Col span={3}>
             <Select
               onChange={this.handleSortChange}
               id="sort"
@@ -240,21 +240,21 @@ export default class CustomerPage extends Component {
               <Select.Option value="asc">ASC</Select.Option>
             </Select>
           </Col>
-          <Col span={4} offset={6}>
+          <Col span={3} offset={5}>
             <Input
               onChange={this.handleNameChange}
               id="customerName"
               placeholder="Name"
             />
           </Col>
-          <Col span={4}>
+          <Col span={3}>
             <Input
               onChange={this.handleEmailChange}
               id="email"
               placeholder="Email"
             />
           </Col>
-          <Col span={2}>
+          <Col span={3}>
             <Select
               onChange={this.handleStatusChange}
               id="status"
@@ -266,7 +266,7 @@ export default class CustomerPage extends Component {
               <Select.Option value="2">Prospective</Select.Option>
             </Select>
           </Col>
-          <Col span={4}>
+          <Col span={3}>
             <Button
               onClick={() => {
                 this.handleFilter();

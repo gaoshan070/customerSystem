@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Card, Button, Modal, Form, Input, Pagination, Row, Col } from "antd";
+import { Card, Button, Pagination, Row, Col } from "antd";
 import { connect } from "dva";
-import TextArea from "antd/lib/input/TextArea";
 import NoteModal from "../components/NoteModal";
 
 const namespace = "notes";
-
-const FormItem = Form.Item;
 
 const style = {
   width: "300px",
@@ -30,25 +27,6 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: `${namespace}/fetch`,
         payload: query
-      });
-    },
-    onClickAdd: newNote => {
-      const action = {
-        type: `${namespace}/addNewNote`,
-        payload: newNote
-      };
-      dispatch(action);
-    },
-    onClickView: id => {
-      dispatch({
-        type: `${namespace}/detail`,
-        payload: id
-      });
-    },
-    saveNote: values => {
-      dispatch({
-        type: `${namespace}/saveNote`,
-        payload: values
       });
     }
   };

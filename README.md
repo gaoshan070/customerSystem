@@ -1,4 +1,3 @@
-
 ### Customer Management Application  
 ***  
 This is a demo application for the technical test.  There are two ways to develop a browser user interface. The first is to use a template engine named Thymeleaf which is the default configuration in  SpringBoot. The other one applies ReacJS, separating the backend and frontend. 
@@ -6,6 +5,7 @@ This is a demo application for the technical test.  There are two ways to develo
 #### 1. Tech Stack  
 
 ***Backend***
+
 SpringBoot  
 Thymeleaf  
 Mybatis  
@@ -13,6 +13,7 @@ Druid
 Swagger2  
 
 ***Frontend***
+
 JQuery  
 JQuery Validation  
 bootstrapTable  
@@ -20,18 +21,21 @@ Layui
 ReactJS  (Ant Design + umi + dva )
   
 ***Development Environment***
-| Tool | Version   | 
-| -----: | --------- | 
-| JDK | 1.8 |
-| MySql | 5.7.16 |
-| Maven  | 3.3.9     | 
-| Node  | v10.15.1   | 
-| Git  | 2.11.0   | 
+
+JDK 1.8 
+
+MySql 5.7.16
+
+Maven  3.3.9
+
+Node  v10.15.1
+
+Git  2.11.0
 
 ***  
 #### 2. Steps to Run the Application  
 1. Backend  
-Go to the root project folder and execute the following command  
+Firstly, execute the sdk_customer.sql in Mysql and go to the root project folder and execute the following command  
 ```  
 mvn spring-boot:run  
 ```  
@@ -61,9 +65,11 @@ Then the service will start up.
 #### 4. Demo 
 
 ***Backend***
+
 http://52.62.10.220:8099/customer 
 
 ***ReactJS Demo***
+
 http://52.62.10.220:8000
 
 ***Swagger API***  
