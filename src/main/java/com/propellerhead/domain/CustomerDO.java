@@ -9,6 +9,13 @@ import java.util.Date;
  */
 public class CustomerDO {
 
+    public CustomerDO() {
+
+    }
+    public CustomerDO(Long customerId, String customerName){
+        this.setCustomerId(customerId);
+        this.setCustomerName(customerName);
+    }
     private Long customerId;
 
     private String customerName;
